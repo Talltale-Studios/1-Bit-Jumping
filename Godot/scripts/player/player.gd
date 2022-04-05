@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export var health : int = 30
 export var speed : float = 100
 export var jump_strength : float = 290
 export var maximum_jumps : float = 1
@@ -97,3 +98,9 @@ func init_level():
 	$Camera2D.smoothing_enabled = true
 	$Tween.interpolate_property($CanvasLayer/Control/ColorRect, "modulate", init_colors[0], init_colors[1], 0.25,Tween.TRANS_LINEAR,Tween.EASE_OUT_IN)
 	$Tween.start()
+
+
+func damage(amount):
+	health -= amount
+	if health <= 0:
+		Loader.go_to(Globals.current_level)

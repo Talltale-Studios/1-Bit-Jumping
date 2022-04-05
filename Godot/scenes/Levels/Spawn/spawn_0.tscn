@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/Levels/Spawn/0/0000-Level_0--01-Tiles_Layer_01.png" type="Texture" id=2]
+[ext_resource path="res://scenes/mobs/skelly.tscn" type="PackedScene" id=3]
+
+[node name="Spawn_0"]
+current_level = "res://scenes/Levels/Spawn/Spawn_0.tscn"
+levels_to_come_from = PoolStringArray( "New_Game" )
+new_game = true
+left_right_limit = PoolIntArray( -376, 376 )
+up_down_limit = PoolIntArray( -280, 256 )
+
+[node name="Level" parent="." index="0"]
+collision_layer = 16
+
+[node name="Sprite" parent="Level" index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level" index="1"]
+polygon = PoolVector2Array( -376, 40, -296, 40, -296, 56, -280, 56, -280, 72, -248, 72, -248, 88, -72, 88, -72, 72, -40, 72, -40, 56, -24, 56, -24, 40, 120, 40, 120, 72, 136, 72, 136, 104, 168, 104, 168, 136, 216, 136, 216, 168, 248, 168, 248, 200, 264, 200, 264, 216, 376, 216, 376, 256, -376, 256 )
+
+[node name="Skelly" parent="Mobs" index="0" instance=ExtResource( 3 )]
+position = Vector2( 16, 32 )
+sleep_mode = 1
+
+[node name="Player" parent="." index="5"]
+position = Vector2( -160, 80 )
+
+[node name="New_Game" type="Position2D" parent="." index="6"]
+position = Vector2( -160, 80 )
+__meta__ = {
+"_gizmo_extents_": 8.0
+}

@@ -1,7 +1,7 @@
 extends Node2D
 
+export var current_level : String
 
-export (Array, NodePath) var positions
 export var levels_to_come_from : PoolStringArray
 
 export var new_game : bool
@@ -14,7 +14,8 @@ onready var player : KinematicBody2D = $Player
 
 
 func _ready():
-	new_game = Globals.new_game
+	Globals.current_level = current_level
+	#new_game = Globals.new_game
 	var player_cam = $Player/Camera2D
 	player_cam.smoothing_enabled = false
 	player_cam.limit_left = left_right_limit[0]
@@ -31,11 +32,10 @@ func _ready():
 	init_timer.one_shot = true
 	init_timer.start()
 	
-	print($Init_Timer)
-	
 	if new_game:
-		pass
+		player.global_position = $New_Game.global_position
 	else:
+		print(false)
 		for text in levels_to_come_from:
 			if Globals.came_from == text:
 				var node = get_node(text)

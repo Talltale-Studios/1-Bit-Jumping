@@ -12,7 +12,6 @@ config_version=4
 
 config/name="1- Bit Jumping"
 config/description="Reality... behaves strangely in these caverns. People never seem to age and dead creatures come back to life. Rock ledges age and crumble to dust within seconds, and then sometimes within minutes reform back to their original state."
-run/main_scene="res://scenes/Levels/Spawn/Spawn_0.tscn"
 config/use_custom_user_dir=true
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
