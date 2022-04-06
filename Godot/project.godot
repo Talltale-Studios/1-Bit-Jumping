@@ -165,26 +165,6 @@ _global_script_classes=[ {
 "path": "res://addons/ExtraGui/SelectionController.gd"
 }, {
 "base": "Control",
-"class": "TE_Editor",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_Editor.gd"
-}, {
-"base": "Resource",
-"class": "TE_ExtensionHelper",
-"language": "GDScript",
-"path": "res://addons/text_editor/ext/TE_ExtensionHelper.gd"
-}, {
-"base": "Reference",
-"class": "TE_StopWords",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_StopWords.gd"
-}, {
-"base": "Reference",
-"class": "TE_Util",
-"language": "GDScript",
-"path": "res://addons/text_editor/TE_Util.gd"
-}, {
-"base": "Control",
 "class": "TabController",
 "language": "GDScript",
 "path": "res://addons/ExtraGui/TabController.gd"
@@ -241,10 +221,6 @@ _global_script_class_icons={
 "SelectBox": "res://addons/ExtraGui/select_icon.png",
 "Selectable": "res://addons/ExtraGui/select_icon.png",
 "SelectionController": "res://addons/ExtraGui/select_icon.png",
-"TE_Editor": "",
-"TE_ExtensionHelper": "",
-"TE_StopWords": "",
-"TE_Util": "",
 "TabController": "res://addons/ExtraGui/tab_icon.png",
 "TabgroupButton": "res://addons/ExtraGui/tab_icon.png",
 "ToggleVisible": "res://addons/ExtraGui/eye_icon.png",
@@ -266,7 +242,7 @@ config/icon="res://assets/graphics/game_icon.png"
 [autoload]
 
 Loader="*res://autoload/interactive_loader/InteractiveLoader.tscn"
-Globals="*res://autoload/Globals.gd"
+Global="*res://autoload/Globals.gd"
 AntialiasedLine2DTexture="*res://addons/antialiased_line2d/texture.gd"
 egs="*res://addons/ExtraGui/extraGuiSingleton.gd"
 
@@ -279,7 +255,7 @@ window/vsync/vsync_via_compositor=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/CollisionPolygonShape/plugin.cfg", "res://addons/ExtraGui/plugin.cfg", "res://addons/RandomAudioNodePlayer/plugin.cfg", "res://addons/SliderLabel/plugin.cfg", "res://addons/animation_frame_picker/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/branch/plugin.cfg", "res://addons/dardanbujupaj.node_warnings/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/launchy/plugin.cfg", "res://addons/mixing-desk/plugin.cfg", "res://addons/orphan_import_file_cleaner/plugin.cfg", "res://addons/project_map/plugin.cfg", "res://addons/sprite_quick_offset/plugin.cfg", "res://addons/text_editor/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/ExtraGui/plugin.cfg", "res://addons/animation_frame_picker/plugin.cfg", "res://addons/antialiased_line2d/plugin.cfg", "res://addons/branch/plugin.cfg", "res://addons/dialogic/plugin.cfg", "res://addons/epic-anchors/plugin.cfg", "res://addons/launchy/plugin.cfg", "res://addons/mixing-desk/plugin.cfg", "res://addons/orphan_import_file_cleaner/plugin.cfg", "res://addons/project_map/plugin.cfg", "res://addons/sprite_quick_offset/plugin.cfg", "res://addons/zoomy/plugin.cfg" )
 
 [importer_defaults]
 
@@ -294,7 +270,7 @@ texture={
 "flags/filter": false,
 "flags/mipmaps": true,
 "flags/repeat": true,
-"flags/srgb": 1,
+"flags/srgb": 2,
 "process/HDR_as_SRGB": false,
 "process/fix_alpha_border": true,
 "process/invert_color": false,

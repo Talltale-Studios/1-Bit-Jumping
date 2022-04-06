@@ -12,8 +12,8 @@ onready var player : KinematicBody2D = $Player
 
 
 func _ready():
-	Globals.current_level = current_level
-	#new_game = Globals.new_game
+	Global.current_level = current_level
+	#new_game = Global.new_game
 	var player_cam = $Player/Camera2D
 	player_cam.smoothing_enabled = false
 	player_cam.limit_left = left_right_limit[0]
@@ -35,7 +35,7 @@ func _ready():
 	else:
 		print(false)
 		for text in levels_to_come_from:
-			if Globals.came_from == text:
+			if Global.came_from == text:
 				var node = get_node(text)
 				player.global_position = node.global_position
 

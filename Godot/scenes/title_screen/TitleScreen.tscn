@@ -5,7 +5,7 @@
 
 [node name="TitleScreen" type="CanvasLayer"]
 script = ExtResource( 2 )
-_target_scene = "res://scenes/title_screen/TitleScreen.tscn"
+_target_scene = "res://scenes/rooms/Spawn0.tscn"
 
 [node name="MainMenu" type="Control" parent="."]
 margin_right = 40.0

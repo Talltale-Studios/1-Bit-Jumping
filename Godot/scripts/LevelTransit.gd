@@ -18,5 +18,5 @@ func _on_Area2D_body_entered(body):
 
 
 func _on_Tween_tween_all_completed():
-	Globals.came_from = came_from_level
+	Global.came_from = came_from_level
 	Loader.go_to(level)

@@ -27,7 +27,7 @@ onready var trail : Particles2D = $Particles2D
 func _ready():
 	$CanvasLayer/Control.show()
 	$CanvasLayer/Control/ColorRect.show()
-	current_skin = 2
+	current_skin = 0
 	
 	var skin_to_free = get_node_or_null("Skin_holder/Sprite")
 	if skin_to_free != null:
@@ -103,4 +103,4 @@ func init_level():
 func damage(amount):
 	health -= amount
 	if health <= 0:
-		Loader.go_to(Globals.current_level)
+		Loader.go_to(Global.current_level)

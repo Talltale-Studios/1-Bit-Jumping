@@ -63,13 +63,14 @@ func _set_new_scene(scene_resource):
 
 
 func go_to(path): # Game requests to switch to this scene
+	current_scene.queue_free() # Get rid of the old scene
 	loader = ResourceLoader.load_interactive(path)
 	if loader == null: # Check for errors
 		# show_error()
 		return
 	set_process(true)
 	
-	current_scene.queue_free() # Get rid of the old scene
+	
 	
 	# Start your loading animation here
 	get_node("Control/ProgressBar").show()
