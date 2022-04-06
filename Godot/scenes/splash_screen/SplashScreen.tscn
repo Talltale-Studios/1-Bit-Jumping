@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/splash_screen/SplashScreen.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/interface/godot_logos/colored/made_with_godot_banner.png" type="Texture" id=2]
+
+[sub_resource type="Animation" id=7]
+resource_name = "Fade"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("Backdrop/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Splash_Screen"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Backdrop/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="SplashScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+_target_scene = "res://scenes/title_screen/TitleScreen.tscn"
+
+[node name="Backdrop" type="ColorRect" parent="."]
+margin_right = 1600.0
+margin_bottom = 900.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GodotLogo" type="Sprite" parent="Backdrop"]
+position = Vector2( 800, 450 )
+scale = Vector2( 0.33, 0.33 )
+texture = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="Backdrop"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Splash_Screen"
+playback_default_blend_time = 0.13
+anims/Fade = SubResource( 7 )
+anims/Splash_Screen = SubResource( 6 )
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

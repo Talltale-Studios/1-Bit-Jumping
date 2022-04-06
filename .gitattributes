@@ -3,6 +3,7 @@ aseperite/* linguist-vendored
 krita/* linguist-vendored
 piskel/* linguist-vendored
 ldtk/* linguist-vendored
+tiled/* linguist-vendored
 temp/* linguist-vendored
 texture_packer/* linguist-vendored
 godot/addons/* linguist-vendored

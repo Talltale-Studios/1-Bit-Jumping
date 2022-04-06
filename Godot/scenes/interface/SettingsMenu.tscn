@@ -1,0 +1,243 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/interface/SettingsMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/interface/tile_0604.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/interface/tile_0632.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/interface/tile_0085.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/interface/tile_0087.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/interface/tile_0631.png" type="Texture" id=6]
+[ext_resource path="res://scripts/interface/SettingsTabs.gd" type="Script" id=7]
+
+[node name="SettingsMenu" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 240.0, 744.0 ],
+"_edit_vertical_guides_": [ 1408.0, 192.0 ]
+}
+
+[node name="Overlay" type="ColorRect" parent="."]
+margin_right = 1600.0
+margin_bottom = 900.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="Panel" type="Panel" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -736.0
+margin_top = -386.0
+margin_right = 736.0
+margin_bottom = 382.0
+rect_pivot_offset = Vector2( 328.5, 158.5 )
+
+[node name="Label" type="Label" parent="Overlay"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -31.9999
+margin_top = 128.0
+margin_right = 32.0001
+margin_bottom = 142.0
+rect_scale = Vector2( 3.5, 3.5 )
+rect_pivot_offset = Vector2( 32, 7 )
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="ApplyButton" type="Button" parent="Overlay"]
+margin_left = 816.0
+margin_top = 768.0
+margin_right = 916.0
+margin_bottom = 788.0
+rect_scale = Vector2( 1.25, 1.25 )
+text = "Apply"
+
+[node name="RevertButton" type="Button" parent="Overlay"]
+margin_left = 968.0
+margin_top = 768.0
+margin_right = 1068.0
+margin_bottom = 788.0
+rect_scale = Vector2( 1.25, 1.25 )
+text = "Revert"
+
+[node name="DefaultsButton" type="Button" parent="Overlay"]
+margin_left = 1120.0
+margin_top = 768.0
+margin_right = 1220.0
+margin_bottom = 788.0
+rect_scale = Vector2( 1.25, 1.25 )
+text = "Defaults"
+
+[node name="BackButton" type="Button" parent="Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 472.0
+margin_top = 318.0
+margin_right = 572.0
+margin_bottom = 338.0
+rect_scale = Vector2( 1.25, 1.25 )
+text = "Back"
+
+[node name="VSlider" type="VSlider" parent="Overlay"]
+margin_left = 1420.0
+margin_top = 240.0
+margin_right = 1436.0
+margin_bottom = 576.0
+rect_scale = Vector2( 1.5, 1.5 )
+min_value = -100.0
+max_value = 0.0
+
+[node name="LeftKeyboard" type="Sprite" parent="Overlay"]
+position = Vector2( 170, 204 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="LeftConsole" type="Sprite" parent="Overlay"]
+visible = false
+position = Vector2( 170, 206 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="LeftArrow" type="Sprite" parent="Overlay"]
+position = Vector2( 121, 205 )
+rotation = -1.5708
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="RightKeyboard" type="Sprite" parent="Overlay"]
+position = Vector2( 1433, 204 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="RightConsole" type="Sprite" parent="Overlay"]
+visible = false
+position = Vector2( 1430, 206 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="RightArrow" type="Sprite" parent="Overlay"]
+position = Vector2( 1479, 205 )
+rotation = 1.5708
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="SettingsTabs" type="Control" parent="Overlay"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+
+[node name="GameplayButton" type="Button" parent="Overlay/SettingsTabs"]
+margin_left = 200.0
+margin_top = 192.0
+margin_right = 300.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.25, 1.25 )
+toggle_mode = true
+pressed = true
+text = "Gameplay"
+
+[node name="AudioButton" type="Button" parent="Overlay/SettingsTabs"]
+margin_left = 352.0
+margin_top = 192.0
+margin_right = 452.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.25, 1.25 )
+toggle_mode = true
+text = "Audio"
+
+[node name="GraphicsButton" type="Button" parent="Overlay/SettingsTabs"]
+margin_left = 656.0
+margin_top = 192.0
+margin_right = 756.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.25, 1.25 )
+toggle_mode = true
+text = "Graphics"
+
+[node name="ControlsButton" type="Button" parent="Overlay/SettingsTabs"]
+margin_left = 968.0
+margin_top = 192.0
+margin_right = 1068.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.25, 1.25 )
+toggle_mode = true
+text = "Controls"
+
+[node name="AccessibilityButton" type="Button" parent="Overlay/SettingsTabs"]
+margin_left = 1272.0
+margin_top = 192.0
+margin_right = 1372.0
+margin_bottom = 212.0
+rect_scale = Vector2( 1.25, 1.25 )
+toggle_mode = true
+text = "Accessibility"
+
+[node name="GameplaySettings" type="Control" parent="Overlay"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="DisplayModes" type="Control" parent="Overlay/GameplaySettings"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Button" type="Button" parent="Overlay/GameplaySettings/DisplayModes"]
+margin_left = 192.0
+margin_top = 240.0
+margin_right = 1165.0
+margin_bottom = 260.0
+rect_scale = Vector2( 1.25, 1.25 )
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="Overlay/GameplaySettings"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="AudioSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Overlay/AudioSettings"]
+margin_left = 395.0
+margin_top = 106.0
+margin_right = 435.0
+margin_bottom = 146.0
+
+[node name="VideoSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="GraphicsSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="InterfaceSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ControlsSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="KeymappingSettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="AccessibilitySettings" type="Control" parent="Overlay"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[connection signal="value_changed" from="Overlay/VSlider" to="." method="_on_VSlider_value_changed"]
+[connection signal="pressed" from="Overlay/SettingsTabs/GameplayButton" to="Overlay/SettingsTabs" method="_on_GameplayButton_pressed"]
+[connection signal="pressed" from="Overlay/SettingsTabs/AudioButton" to="Overlay/SettingsTabs" method="_on_AudioButton_pressed"]
+[connection signal="pressed" from="Overlay/SettingsTabs/GraphicsButton" to="Overlay/SettingsTabs" method="_on_GraphicsButton_pressed"]
+[connection signal="pressed" from="Overlay/SettingsTabs/ControlsButton" to="Overlay/SettingsTabs" method="_on_ControlsButton_pressed"]
+[connection signal="pressed" from="Overlay/SettingsTabs/AccessibilityButton" to="Overlay/SettingsTabs" method="_on_AccessibilityButton_pressed"]

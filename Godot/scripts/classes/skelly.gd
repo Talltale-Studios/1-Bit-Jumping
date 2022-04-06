@@ -3,7 +3,7 @@ extends KinematicBody2D
 export (int, "Can Sleep", "Can't Sleep") var sleep_mode
 
 export var speed : int = 60
-export var patrol_speed : int = 30
+export var patrol_speed : int = 25
 export var health : int = 10
 export var damage : int = 5
 
@@ -66,7 +66,7 @@ func _physics_process(delta):
 			if $Timer.time_left == 0:
 				var a_rng = RandomNumberGenerator.new()
 				a_rng.randomize()
-				$Timer.wait_time = a_rng.randf_range(0, 1)
+				$Timer.wait_time = a_rng.randf_range(0, 2)
 				$Timer.start()
 		
 		STATES.SLEEP:
@@ -121,7 +121,7 @@ func _patrol_handler():
 		
 		new_pos = position.x + randnum
 		
-		var randtime = rangen.randf_range(0, 3)
+		var randtime = rangen.randf_range(0, 4)
 		patrol_timer.wait_time = randtime
 		if randnum > 0:
 			horizontal_direction = 1

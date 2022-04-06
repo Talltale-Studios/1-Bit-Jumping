@@ -1,0 +1,167 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/interface/SettingsMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/title_screen/TitleScreen.gd" type="Script" id=2]
+
+[node name="TitleScreen" type="CanvasLayer"]
+script = ExtResource( 2 )
+_target_scene = "res://scenes/title_screen/TitleScreen.tscn"
+
+[node name="MainMenu" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Overlay" type="ColorRect" parent="MainMenu"]
+margin_right = 1600.0
+margin_bottom = 900.0
+color = Color( 1, 1, 1, 0 )
+
+[node name="StartMenu" type="Control" parent="MainMenu/Overlay"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 20, 20 )
+
+[node name="Panel" type="Panel" parent="MainMenu/Overlay/StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -110.0
+margin_right = 95.0
+margin_bottom = 110.0
+rect_pivot_offset = Vector2( 104, 124 )
+
+[node name="StartButton" type="Button" parent="MainMenu/Overlay/StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -85.0
+margin_right = 50.0
+margin_bottom = -65.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50, 10 )
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="MainMenu/Overlay/StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = -35.0
+margin_right = 50.0
+margin_bottom = -15.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50, 10 )
+text = "Options"
+
+[node name="CreditsButton" type="Button" parent="MainMenu/Overlay/StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 15.0
+margin_right = 50.0
+margin_bottom = 35.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50, 10 )
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="MainMenu/Overlay/StartMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -50.0
+margin_top = 65.0
+margin_right = 50.0
+margin_bottom = 85.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 50, 10 )
+text = "Quit"
+
+[node name="SettingsMenu" parent="MainMenu/Overlay" instance=ExtResource( 1 )]
+visible = false
+
+[node name="QuitConfirmation" type="Control" parent="MainMenu/Overlay"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_pivot_offset = Vector2( 20, 20 )
+
+[node name="Panel" type="Panel" parent="MainMenu/Overlay/QuitConfirmation"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -55.0
+margin_right = 100.0
+margin_bottom = 60.0
+rect_pivot_offset = Vector2( 20, 20 )
+
+[node name="Label" type="Label" parent="MainMenu/Overlay/QuitConfirmation"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -65.0
+margin_top = -35.0
+margin_right = 22.0
+margin_bottom = -21.0
+rect_scale = Vector2( 1.5, 1.5 )
+text = "Are you sure?"
+align = 1
+valign = 1
+
+[node name="YesButton" type="Button" parent="MainMenu/Overlay/QuitConfirmation"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -70.0
+margin_top = 15.0
+margin_right = -30.0
+margin_bottom = 35.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 20, 10 )
+text = "Yes"
+
+[node name="NoButton" type="Button" parent="MainMenu/Overlay/QuitConfirmation"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 30.0
+margin_top = 15.0
+margin_right = 70.0
+margin_bottom = 35.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 20, 10 )
+text = "No"
+
+[connection signal="pressed" from="MainMenu/Overlay/StartMenu/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/StartMenu/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/StartMenu/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/StartMenu/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/SettingsMenu/Overlay/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/QuitConfirmation/YesButton" to="." method="_on_YesButton_pressed"]
+[connection signal="pressed" from="MainMenu/Overlay/QuitConfirmation/NoButton" to="." method="_on_NoButton_pressed"]
+
+[editable path="MainMenu/Overlay/SettingsMenu"]

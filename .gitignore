@@ -11,6 +11,7 @@ export_presets.cfg
 *.stex
 
 # Project-specific ignores
+text_editor/
 *.text_editor_state.json
 
 # Imported translations (automatically generated from CSV files)

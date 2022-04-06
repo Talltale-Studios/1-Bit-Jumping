@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/mobs/Skelly.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/rooms/level_Base.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/graphics/rooms/Spawn/0/0000-Level_0--01-Tiles_Layer_01.png" type="Texture" id=3]
+
+[node name="Spawn0" instance=ExtResource( 2 )]
+current_level = "res://scenes/Levels/Spawn0.tscn"
+new_game = true
+left_right_limit = PoolIntArray( -376, 376 )
+up_down_limit = PoolIntArray( -280, 256 )
+
+[node name="Sprite" parent="Level" index="0"]
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level" index="1"]
+polygon = PoolVector2Array( 376, 216, 376, 256, -376, 256, -376, 40, -296, 40, -296, 56, -280, 56, -280, 72, -248, 72, -248, 88, -72, 88, -72, 72, -40, 72, -40, 56, -24, 56, -24, 40, 120, 40, 120, 72, 136, 72, 136, 104, 168, 104, 168, 136, 216, 136, 216, 168, 248, 168, 248, 200, 264, 200, 264, 216 )
+
+[node name="Skelly" parent="Mobs" index="0" instance=ExtResource( 1 )]
+position = Vector2( 8, 32 )
+
+[node name="New_Game" type="Node2D" parent="." index="6"]
+position = Vector2( -168, 80 )

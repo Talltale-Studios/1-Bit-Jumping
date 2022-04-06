@@ -1,0 +1,254 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://addons/project_map/project_map.gd" type="Script" id=1]
+[ext_resource path="res://addons/project_map/pm_comment_node.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/project_map/pm_comment_node.gd" type="Script" id=3]
+[ext_resource path="res://addons/project_map/pm_group_node.gd" type="Script" id=4]
+[ext_resource path="res://addons/project_map/pm_group_node.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/project_map/group.stylebox" type="StyleBox" id=6]
+[ext_resource path="res://addons/project_map/group_selected.stylebox" type="StyleBox" id=7]
+[ext_resource path="res://addons/project_map/pm_file_node.gd" type="Script" id=8]
+[ext_resource path="res://addons/project_map/pm_file_node.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/project_map/node.stylebox" type="StyleBox" id=10]
+[ext_resource path="res://addons/project_map/node_selected.stylebox" type="StyleBox" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.231373, 0.309804, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="ProjectMap" type="GraphEdit"]
+visible = false
+margin_right = 906.0
+margin_bottom = 749.0
+rect_min_size = Vector2( 500, 500 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/bg = SubResource( 1 )
+scroll_offset = Vector2( -743.461, -315.62 )
+snap_distance = 32
+zoom = 0.632568
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CommentNode" type="GraphNode" parent="." instance=ExtResource( 2 )]
+margin_left = 885.156
+margin_top = 228.326
+margin_right = 1380.16
+margin_bottom = 583.326
+rect_min_size = Vector2( 495, 355 )
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_styles/commentfocus = SubResource( 2 )
+custom_styles/comment = SubResource( 3 )
+offset = Vector2( 224, -138 )
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+comment_text = "Welcome to Project Map
+
+To start, drag files from the Godot filesystem into this screen to create file nodes. Click on the name to open it.
+
+Drag the icons to move the nodes.
+
+Click \"Add Group\" or \"Add Comment\" and click anywhere to add a group/comment node.
+
+What you are reading is a comment node. Use the bottom-right handle to resize it, it appears when hovering the comment.
+Click on the icon and press delete to delete it."
+comment_rect = Vector2( 495, 355 )
+
+[node name="GroupNode" type="GraphNode" parent="." instance=ExtResource( 5 )]
+margin_left = 622.008
+margin_top = 275.136
+margin_right = 910.008
+margin_bottom = 499.136
+rect_min_size = Vector2( 288, 224 )
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 7 )
+custom_styles/comment = ExtResource( 6 )
+offset = Vector2( -192, -64 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Classes"
+
+[node name="GroupNode2" type="GraphNode" parent="." instance=ExtResource( 5 )]
+margin_left = 399.344
+margin_top = 275.136
+margin_right = 687.344
+margin_bottom = 499.136
+rect_min_size = Vector2( 288, 224 )
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_styles/commentfocus = ExtResource( 7 )
+custom_styles/comment = ExtResource( 6 )
+offset = Vector2( -544, -64 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Prefabs"
+
+[node name="FileNode" type="GraphNode" parent="." instance=ExtResource( 9 )]
+margin_left = 622.008
+margin_top = 295.378
+margin_right = 818.008
+margin_bottom = 357.378
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 10 )
+custom_styles/selectedframe = ExtResource( 11 )
+offset = Vector2( -192, -32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/classes/AttacksHumanoid.tscn"
+icon_class = "Node2D"
+script_path = "res://scripts/classes/attacks_humanoid.gd"
+script_name = "attacks_humanoid.gd"
+
+[node name="FileNode2" type="GraphNode" parent="." instance=ExtResource( 9 )]
+margin_left = 622.008
+margin_top = 335.862
+margin_right = 750.008
+margin_bottom = 397.862
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 10 )
+custom_styles/selectedframe = ExtResource( 11 )
+offset = Vector2( -192, 32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/classes/Roleplay.tscn"
+icon_class = "Area2D"
+script_path = "res://scripts/classes/roleplay.gd"
+script_name = "roleplay.gd"
+
+[node name="FileNode3" type="GraphNode" parent="." instance=ExtResource( 9 )]
+margin_left = 622.008
+margin_top = 376.347
+margin_right = 735.008
+margin_bottom = 438.347
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 10 )
+custom_styles/selectedframe = ExtResource( 11 )
+offset = Vector2( -192, 96 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/projectiles/Bullet.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/projectiles/bullet.gd"
+script_name = "bullet.gd"
+
+[node name="FileNode4" type="GraphNode" parent="." instance=ExtResource( 9 )]
+margin_left = 399.344
+margin_top = 295.378
+margin_right = 604.344
+margin_bottom = 357.378
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 10 )
+custom_styles/selectedframe = ExtResource( 11 )
+offset = Vector2( -544, -32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://prefabs/humanoid_skeleton/HumanoidSkeleton.tscn"
+icon_class = "Skeleton2D"
+script_path = "res://scenes/prefabs/humanoid_skeleton.gd"
+script_name = "humanoid_skeleton.gd"
+
+[node name="FileNode5" type="GraphNode" parent="." instance=ExtResource( 9 )]
+margin_left = 298.133
+margin_top = 275.136
+margin_right = 414.133
+margin_bottom = 337.136
+rect_scale = Vector2( 0.632568, 0.632568 )
+mouse_filter = 1
+custom_constants/port_offset = 0
+custom_styles/frame = ExtResource( 10 )
+custom_styles/selectedframe = ExtResource( 11 )
+offset = Vector2( -704, -64 )
+selected = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://scenes/player/Player.tscn"
+icon_class = "KinematicBody2D"
+script_path = "res://scripts/player/player.gd"
+script_name = "player.gd"
+
+[connection signal="delete_nodes_request" from="." to="." method="_on_GraphEdit_delete_nodes_request"]

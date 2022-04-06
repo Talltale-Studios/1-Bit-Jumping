@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/credits_screen/CreditsScreen.gd" type="Script" id=1]
+
+[node name="CreditsScreen" type="Node2D"]
+script = ExtResource( 1 )
+_target_scene = "res://scenes/title_screen/TitleScreen.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BackButton" type="Button" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_top = -45.0
+margin_right = 95.0
+margin_bottom = -25.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 30, 10 )
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/BackButton" to="." method="_on_BackButton_pressed"]
