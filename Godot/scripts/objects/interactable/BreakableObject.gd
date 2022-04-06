@@ -1,7 +1,23 @@
 extends StaticBody2D
 
+# Normal attacks have breaking_power 1.
+# Abilities have breaking_power 2.
+# Explosives have breaking_power 3.
+# Toughness determines how much breaking_power is
+#required in order to be able to damage the barrier
+# The amount of damage the damage source does
+#determines how quickly the barrier breaks, or iow
+#how quickly it changes through its phases.
+# For example, attacks with 2 damage will cause
+#the barrier to change through 2 phases at a time,
+#whereas attacks with only 1 damage will cause it to
+#change through 1 phase at a time.
 
-export (int, "1","2","3") var phase_count
+
+
+export (String, "Vertical", "Horizontal") var alignment
+export (int, "1", "2", "3") var toughness
+export (int, "1", "2", "3", "4", "5", "6", "7", "8", "9", "10") var phase_count
 export (Array, Texture) var top_phases
 export (Array, Texture) var middle_phases
 export (Array, Texture) var bottom_phases
