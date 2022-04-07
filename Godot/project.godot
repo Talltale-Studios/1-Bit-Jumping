@@ -252,6 +252,7 @@ window/size/width=1600
 window/size/height=900
 window/dpi/allow_hidpi=true
 window/vsync/vsync_via_compositor=true
+window/stretch/mode="viewport"
 
 [editor_plugins]
 

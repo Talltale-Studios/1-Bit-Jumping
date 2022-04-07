@@ -7,15 +7,11 @@ export var maximum_jumps : float = 1
 export var double_jump_strength : float = 125
 export var gravity : float = 600
 
-export (Array, PackedScene) var skins
-
 export var init_colors : PoolColorArray
 
 var up_direction = Vector2.UP
 var _jumps_made : int = 0
 var _velocity : Vector2 = Vector2.ZERO
-
-var current_skin
 
 var score : int = 0
 
@@ -27,15 +23,6 @@ onready var trail : Particles2D = $Particles2D
 func _ready():
 	$CanvasLayer/Control.show()
 	$CanvasLayer/Control/ColorRect.show()
-	current_skin = 0
-	
-	var skin_to_free = get_node_or_null("Skin_holder/Sprite")
-	if skin_to_free != null:
-		skin_to_free.name = "queued"
-		skin_to_free.queue_free()
-	
-	var skin_to_load = skins[current_skin].instance()
-	skin_holder.add_child(skin_to_load)
 
 
 func _physics_process(delta : float):
@@ -75,19 +62,21 @@ func _physics_process(delta : float):
 
 
 func _skin_handler(left, right, jumping, falling, running, idle):
-	var anim : AnimationPlayer = get_node_or_null("Skin_holder/Sprite/AnimationPlayer")
-	
-	if left:
-		skin_holder.scale.x = -1
-	if right:
-		skin_holder.scale.x = 1
-	
-	if idle and not falling and not jumping:
-		anim.play("idle")
-	elif running and not jumping and not falling:
-		anim.play("run")
-	elif jumping or falling:
-		anim.play("jump")
+	if health > 0:
+		var anim : AnimationPlayer = get_node_or_null("Skin_holder/Sprite/AnimationPlayer")
+		
+		if left:
+			skin_holder.scale.x = -1
+		if right:
+			skin_holder.scale.x = 1
+		
+		if idle and not falling and not jumping:
+			anim.play("idle")
+		elif running and not jumping and not falling:
+			anim.play("run")
+		elif jumping or falling:
+			if not anim.current_animation == "falling":
+				anim.play("jump")
 
 
 func _emit_trail():
@@ -101,6 +90,13 @@ func init_level():
 
 
 func damage(amount):
+	var anim : AnimationPlayer = get_node_or_null("Skin_holder/Sprite/AnimationPlayer")
 	health -= amount
 	if health <= 0:
-		Loader.go_to(Global.current_level)
+		anim.play("die")
+
+
+func _on_animation_finished(anim_name):
+	match anim_name:
+		"die":
+			Loader.go_to(Global.current_level)

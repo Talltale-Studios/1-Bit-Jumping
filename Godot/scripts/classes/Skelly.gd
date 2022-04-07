@@ -32,8 +32,8 @@ var patrol_timer : Timer
 
 onready var target = get_node("../../Player")
 onready var anim = get_node("AnimationPlayer")
-onready var right_detect = $Right_Detect
-onready var left_detect = $Left_Detect
+onready var right_detect : RayCast2D= $Right_Detect
+onready var left_detect : RayCast2D = $Left_Detect
 
 
 func _ready():
@@ -97,10 +97,19 @@ func _physics_process(delta):
 		STATES.CHASE:
 			_velocity.x = speed * horizontal_direction
 			if target.position.x > position.x:
-				horizontal_direction = 1
+				if right_detect.is_colliding():
+					_play("walk")
+					horizontal_direction = 1
+				else:
+					_play("idle")
+					horizontal_direction = 0
 			if target.position.x < position.x:
-				horizontal_direction = -1
-			_play("walk")
+				if left_detect.is_colliding():
+					_play("walk")
+					horizontal_direction = -1
+				else:
+					_play("idle")
+					horizontal_direction = 0
 		
 		STATES.ATTACK:
 			_velocity.x = speed * horizontal_direction
@@ -144,8 +153,7 @@ func _play(anim_name):
 	if not anim.is_playing():
 		anim.play(anim_name)
 	else:
-		if anim.current_animation != anim_name:
-			anim.play(anim_name)
+		anim.play(anim_name)
 
 
 func _patrol_timeout():
