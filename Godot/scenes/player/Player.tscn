@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=55 format=2]
 
 [ext_resource path="res://scripts/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/graphics/player/walk/sprite_ase1_walk_5.png" type="Texture" id=2]
@@ -62,6 +62,21 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale_curve = SubResource( 5 )
 color_ramp = SubResource( 3 )
+
+[sub_resource type="Animation" id=16]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 30 ) ]
+}
 
 [sub_resource type="Animation" id=7]
 resource_name = "attack_front"
@@ -165,6 +180,24 @@ tracks/0/keys = {
 "values": [ ExtResource( 7 ), ExtResource( 30 ), ExtResource( 21 ), ExtResource( 25 ), ExtResource( 2 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 31 ) ]
 }
 
+[sub_resource type="Animation" id=17]
+resource_name = "walk"
+length = 0.666667
+loop = true
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ), ExtResource( 30 ), ExtResource( 21 ), ExtResource( 25 ), ExtResource( 2 ), ExtResource( 23 ), ExtResource( 20 ), ExtResource( 31 ) ]
+}
+
 [sub_resource type="DynamicFontData" id=14]
 font_path = "res://Minecraft.ttf"
 
@@ -174,13 +207,10 @@ font_data = SubResource( 14 )
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 collision_mask = 16
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_horizontal_guides_": [ -3.0, 8.0, 7.0 ],
-"_edit_vertical_guides_": [ -6.0, 6.0 ]
-}
 init_colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 0 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -189,18 +219,19 @@ local_coords = false
 process_material = SubResource( 6 )
 texture = ExtResource( 6 )
 
-[node name="Skin_holder" type="Node2D" parent="."]
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 30 )
 
-[node name="Sprite" type="Sprite" parent="Skin_holder"]
-texture = ExtResource( 38 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Skin_holder/Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "idle"
+anims/RESET = SubResource( 16 )
 anims/attack_front = SubResource( 7 )
 anims/die = SubResource( 10 )
 anims/falling = SubResource( 15 )
 anims/idle = SubResource( 11 )
 anims/jump = SubResource( 12 )
 anims/run = SubResource( 13 )
+anims/walk = SubResource( 17 )
 next/jump = "falling"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -237,4 +268,4 @@ color = Color( 0, 0, 0, 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="animation_finished" from="Skin_holder/Sprite/AnimationPlayer" to="." method="_on_animation_finished"]
+[connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_finished"]
