@@ -29,7 +29,7 @@ func _ready():
 	init_timer.wait_time = 0.1
 	init_timer.one_shot = true
 	init_timer.start()
-	
+
 	if new_game:
 		player.global_position = $New_Game.global_position
 	else:

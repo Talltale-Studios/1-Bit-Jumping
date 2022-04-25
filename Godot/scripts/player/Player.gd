@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
-enum States {IDLE, Walk, JUMP, FALL, ATTACK}
+enum States {IDLE, Walk, JUMP, FALL, DASH, ATTACK}
 
 
+export var attack_damage : int
 export var health : int = 30
 export var speed : float = 100
 export var jump_strength : float = 290
@@ -16,14 +17,18 @@ var up_direction = Vector2.UP
 var _jumps_made : int = 0
 var _velocity : Vector2 = Vector2.ZERO
 
-var score : int = 0
+var score := 0
 
 var state
+
+var jump_held := false
 
 
 onready var sprite : Sprite = $Sprite
 onready var trail : Particles2D = $Particles2D
-onready var anim : AnimationPlayer = get_node_or_null("Sprite/AnimationPlayer")
+onready var legAnim : AnimationPlayer = get_node_or_null("legs")
+onready var torsoAnim := get_node_or_null("torso")
+onready var horizontal_attack_area = $attack_areas/horizontal
 
 
 func _ready():
@@ -40,56 +45,29 @@ func _physics_process(delta : float):
 	_velocity.x = horizontal_direction * speed
 	_velocity.y += gravity * delta
 
-	var jump = Input.is_action_just_pressed("jump")
-	var jump_cancel = Input.is_action_just_released("jump")
 	var attack = Input.is_action_just_pressed("attack")
-
-	if not state == States.ATTACK:
-		if is_on_floor():
-			if left or right:
-				state = States.Walk
-
-			if not left or right and is_on_floor():
-				state = States.IDLE
-
-			if jump:
-				state = States.JUMP
-
-
-		if jump_cancel:
-			state = States.FALL
-
-	if attack:
-		state = States.ATTACK
-
 
 	match state:
 		States.IDLE:
-			anim.play("idle")
-
+			legAnim.play("idle")
+			torsoAnim.play("idle")
 		States.Walk:
-			anim.play("walk")
-
+			legAnim.play("run")
+			torsoAnim.play("run")
 		States.JUMP:
-			anim.play("jump")
-
+			#if legAnim.current_animation != "fall":
+			legAnim.play("jump")
+			torsoAnim.play("jump")
 		States.FALL:
-			anim.play("falling")
-
+			#legAnim.play("fall")
+			pass
+		States.DASH:
+			pass
 		States.ATTACK:
-			anim.play("attack_front")
-	print(state)
+			if legAnim.current_animation != "attack":
+				torsoAnim.play("attack")
 
 	_velocity = move_and_slide(_velocity, up_direction)
-
-
-
-
-
-
-
-
-
 
 	var is_falling = _velocity.y > 0.0 and not is_on_floor()
 	var is_jumping = Input.is_action_just_pressed("jump") and is_on_floor()
@@ -98,52 +76,71 @@ func _physics_process(delta : float):
 	var is_idling = is_on_floor() and is_zero_approx(_velocity.x)
 	var is_running = is_on_floor() and not is_zero_approx(_velocity.x)
 
-
-
-
-
 	if is_jumping:
-		_velocity.y += -jump_strength
+		_velocity.y = -jump_strength
 	elif is_double_jumping:
 		_jumps_made += 1
 		if _jumps_made < maximum_jumps:
 			_velocity.y = -jump_strength
 	elif is_jump_cancelled:
-		_velocity.y = 0.0
+		jump_held = false
+		_velocity.y = 0
 		pass
 	elif is_idling or is_running:
 		_jumps_made = 0
 
 
 	if health > 0:
-		if left or right:
-			#if anim.current_animation != "attack_front":
-			anim.play("walk")
+		if state != States.ATTACK:
 			if left:
-				sprite.flip_h = true
+				horizontal_attack_area.rotation_degrees = -180
+				$Skeleton2D.scale.x = -1
 			if right:
-				sprite.flip_h = false
+				horizontal_attack_area.rotation_degrees = 0
+				$Skeleton2D.scale.x = 1
+			if is_running:
+				#if legAnim.current_animation != "attack_front":
+				state = States.Walk
 
-		if is_idling:
-				anim.play("idle")
 
-		if is_running:
-				anim.play("run")
+			if is_idling:
+					state = States.IDLE
 
-		if is_jumping or is_falling:
-				anim.play("jump")
+			if is_falling or is_jumping:
+
+
+				if state != States.FALL:
+					state = States.JUMP
 
 		if attack:
-				anim.play("attack_front")
-
-
-
-
+			if state != States.ATTACK:
+				state = States.ATTACK
 
 
 func _emit_trail():
 	trail.emitting = true
 
+
+func _on_animation_finished(anim_name):
+	match anim_name:
+		"jump":
+			state = States.FALL
+
+		"attack":
+			state = States.IDLE
+
+		"die":
+			Loader.go_to(Global.current_level)
+
+
+func _attack_init():
+	$attack_areas/horizontal/CollisionShape2D.disabled = false
+	pass
+
+func _attack_end(body: Node) -> void:
+	if body.has_method("damage"):
+		body.damage(attack_damage)
+	$attack_areas/horizontal/CollisionShape2D.disabled = true
 
 func init_level():
 	$Camera2D.smoothing_enabled = true
@@ -154,10 +151,10 @@ func init_level():
 func damage(amount):
 	health -= amount
 	if health <= 0:
-		anim.play("die")
+		legAnim.play("die")
 
 
-func _on_animation_finished(anim_name):
-	match anim_name:
-		"die":
-			Loader.go_to(Global.current_level)
+
+
+func _on_jump_length_timer_timeout() -> void:
+	pass # Replace with function body.

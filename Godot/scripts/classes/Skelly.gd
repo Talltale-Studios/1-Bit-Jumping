@@ -21,7 +21,7 @@ enum STATES {
 var _velocity : Vector2 = Vector2()
 var state = STATES.SLEEP
 
-var dir : int 
+var dir : int
 var new_pos
 var horizontal_direction = 0
 
@@ -42,7 +42,7 @@ func _ready():
 			state = STATES.SLEEP
 		1:
 			state = STATES.PATROL
-	
+
 	var a : Timer = Timer.new()
 	a.name = "Patrol_Timer"
 	add_child(a)
@@ -57,7 +57,7 @@ func _physics_process(delta):
 		$Timer.stop()
 	if state != STATES.PATROL:
 		patrol_timer.stop()
-	
+
 	match state:
 		STATES.IDLE:
 			horizontal_direction = 0
@@ -68,15 +68,15 @@ func _physics_process(delta):
 				a_rng.randomize()
 				$Timer.wait_time = a_rng.randf_range(0, 2)
 				$Timer.start()
-		
+
 		STATES.SLEEP:
 			_play("sleep")
 			_velocity.x = speed * horizontal_direction
-		
+
 		STATES.SLEEP_TO_IDLE:
 			_play("sleep_to_idle")
 			_velocity.x = speed * horizontal_direction
-		
+
 		STATES.PATROL:
 			_velocity.x = patrol_speed * horizontal_direction
 			_patrol_handler()
@@ -84,7 +84,7 @@ func _physics_process(delta):
 				horizontal_direction = 1
 			if not right_detect.is_colliding():
 				horizontal_direction = -1
-	
+
 			match horizontal_direction:
 				-1:
 					_play("walk")
@@ -92,8 +92,8 @@ func _physics_process(delta):
 					_play("walk")
 				0:
 					_play("idle")
-			
-		
+
+
 		STATES.CHASE:
 			_velocity.x = speed * horizontal_direction
 			if target.position.x > position.x:
@@ -110,35 +110,35 @@ func _physics_process(delta):
 				else:
 					_play("idle")
 					horizontal_direction = 0
-		
+
 		STATES.ATTACK:
 			_velocity.x = speed * horizontal_direction
 			horizontal_direction = 0
 			if anim.current_animation != "attack":
 				_play("attack")
-		
+
 	_velocity = move_and_slide(_velocity)
 
 
 # Handles the patrol state
 func _patrol_handler():
 	if patrol_timer.time_left == 0:
-		
+
 		var rangen := RandomNumberGenerator.new()
 		rangen.randomize()
 		var randnum = rangen.randi_range(-24, 24)
-		
+
 		new_pos = position.x + randnum
-		
+
 		var randtime = rangen.randf_range(0, 4)
 		patrol_timer.wait_time = randtime
 		if randnum > 0:
 			horizontal_direction = 1
 		elif randnum < 0:
 			horizontal_direction = -1
-		
+
 		dir = rangen.randi_range(0,1)
-		
+
 		state = STATES.PATROL
 		patrol_timer.start()
 

@@ -31,30 +31,30 @@ func _tab_key_switcher() -> void:
 				_tab_hider(tabs[4], tabs[0])
 			elif Input.is_action_just_pressed("next_tab"):
 				_tab_hider(tabs[1], tabs[0])
-		
+
 		"Audio":
-			current_tab[1]
+			current_tab = tabs[1]
 			if Input.is_action_just_pressed("previous_tab"):
 				_tab_hider(tabs[0], tabs[1])
 			elif Input.is_action_just_pressed("next_tab"):
 				_tab_hider(tabs[2], tabs[1])
-		
+
 		"Graphics":
-			current_tab[2]
+			current_tab = tabs[2]
 			if Input.is_action_just_pressed("previous_tab"):
 				_tab_hider(tabs[1], tabs[2])
 			elif Input.is_action_just_pressed("next_tab"):
 				_tab_hider(tabs[3], tabs[2])
-		
+
 		"Controls":
-			current_tab[3]
+			current_tab = tabs[3]
 			if Input.is_action_just_pressed("previous_tab"):
 				_tab_hider(tabs[2], tabs[3])
 			elif Input.is_action_just_pressed("next_tab"):
 				_tab_hider(tabs[4], tabs[3])
-		
+
 		"Accessibility":
-			current_tab[4]
+			current_tab = tabs[4]
 			if Input.is_action_just_pressed("previous_tab"):
 				_tab_hider(tabs[3], tabs[4])
 			elif Input.is_action_just_pressed("next_tab"):
